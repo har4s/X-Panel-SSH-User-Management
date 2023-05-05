@@ -1,7 +1,12 @@
-FROM debian:stable-slim
+FROM ubuntu:22.04
+RUN apt install -y bash
 WORKDIR /root
 COPY . .
-RUN bash <(curl -Ls https://raw.githubusercontent.com/Alirezad07/X-Panel-SSH-User-Management/master/install.sh --ipv4)
-RUN bash <(curl -Ls https://raw.githubusercontent.com/Alirezad07/X-Panel-SSH-User-Management/master/fix-call.sh --ipv4)
-RUN bash <(curl -Ls https://raw.githubusercontent.com/Alirezad07/X-Panel-SSH-User-Management/master/ssl.sh --ipv4)
-EXPOSE 22 8081
+RUN chmod +x ./install.sh
+RUN chmod +x ./fix-call.sh
+RUN chmod +x ./ssl.sh
+RUN bash ./install.sh
+RUN bash ./fix-call.sh
+RUN bash ./ssl.sh
+EXPOSE 22
+EXPOSE 8081
