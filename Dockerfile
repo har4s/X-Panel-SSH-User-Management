@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM debian:stable-slim
 WORKDIR /root
 COPY . .
 RUN chmod +x ./install.sh
