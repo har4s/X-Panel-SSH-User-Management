@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 WORKDIR /root
 COPY . .
-RUN ./install.sh --ipv4
-RUN ./fix-call.sh  --ipv4
-RUN ./ssl.sh  --ipv4
+RUN /root/install.sh --ipv4
+RUN /root/fix-call.sh  --ipv4
+RUN /root/ssl.sh  --ipv4
 EXPOSE 22 8081
