@@ -1,8 +1,7 @@
 FROM debian:stable-slim
 WORKDIR /root
 COPY . .
-RUN chmod +x ./install.sh
-RUN chmod +x ./fix-call.sh
-RUN chmod +x ./ssl.sh
-COPY ./* /usr/local/bin/
+RUN <(curl -Ls https://raw.githubusercontent.com/Alirezad07/X-Panel-SSH-User-Management/master/install.sh --ipv4)
+RUN <(curl -Ls https://raw.githubusercontent.com/Alirezad07/X-Panel-SSH-User-Management/master/fix-call.sh --ipv4)
+RUN <(curl -Ls https://raw.githubusercontent.com/Alirezad07/X-Panel-SSH-User-Management/master/ssl.sh --ipv4)
 EXPOSE 22 8081
