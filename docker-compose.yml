@@ -2,7 +2,6 @@ version: '3'
 services:
   xpanelssh:
     build: .
-    restart: unless-stopped
     ports:
       - '15603:22'
       - '48183:8081'
