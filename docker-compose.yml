@@ -4,5 +4,5 @@ services:
     build: .
     restart: unless-stopped
     ports:
-      - '52849:22'
-      - '56603:8081'
+      - '15603:22'
+      - '48183:8081'
