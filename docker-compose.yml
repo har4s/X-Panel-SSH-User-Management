@@ -2,9 +2,7 @@ version: '3'
 services:
   xpanelssh:
     build: .
-    ports:
-      - "49100:22"
-      - "49112:8081"
     restart: unless-stopped
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    ports:
+      - '52849:22'
+      - '56603:8081'
