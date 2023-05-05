@@ -1,7 +1,9 @@
 FROM ubuntu:22.04
-RUN apt install -y bash
+ENV TZ=Asia/Tehran \
+    DEBIAN_FRONTEND=noninteractive
+RUN apt update -y && apt install bash sudo -y
 WORKDIR /root
 COPY . .
 RUN chmod +x ./install.sh
-ENTRYPOINT ["./install.sh"]
+RUN bash ./install.sh
 EXPOSE 22 8081
