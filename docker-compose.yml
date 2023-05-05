@@ -1,0 +1,7 @@
+version: '2'
+services:
+  x-panel-ssh:
+    image: .
+    ports:
+      - "49100:22"
+      - "49112:8081"
