@@ -5,3 +5,4 @@ services:
     ports:
       - '15603:22'
       - '48183:8081'
+    restart: "unless-stopped"
