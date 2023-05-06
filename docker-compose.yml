@@ -1,8 +1,8 @@
-version: '4'
+version: '3'
 services:
   xpanelssh:
     build: .
     ports:
       - '15603:22'
-      - '48183:8081'
+      - '48183:48183'
     # restart: "unless-stopped"

@@ -1,5 +1,4 @@
 #!/bin/bash
-sudo service mysql restart
 sed -i 's/#Port 22/Port 22/' /etc/ssh/sshd_config
 po=$(cat /etc/ssh/sshd_config | grep "^Port")
 port=$(echo "$po" | sed "s/Port //g")
@@ -106,14 +105,14 @@ if command -v apt-get >/dev/null; then
     echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/iptables' | sudo EDITOR='tee -a' visudo &
     wait
     echo -e "\nPlease input Panel admin Port."
-    printf "Default port 8081: "
+    printf "Default port 48183: "
     read porttmp
     if [[ -n "${porttmp}" ]]; then
         #Get the server port number from my settings file
         serverPort=${porttmp}
         echo $serverPort
     else
-        serverPort=8081
+        serverPort=48183
         echo $serverPort
     fi
     ##Get just the port number from the settings variable I just grabbed
@@ -239,18 +238,18 @@ sudo sed -i "s/SERVERPASSWORD/$adminpassword/g" /var/www/html/cp/killusers.sh &
 wait
 sudo sed -i "s/SERVERIP/$ipv4/g" /var/www/html/cp/killusers.sh &
 wait
-# curl -u "$adminusername:$adminpassword" "http://${ipv4}:$serverPort/cp/reinstall.php"
-# cp /var/www/html/cp/tarikh /var/www/html/cp/backup/tarikh
-# rm -fr /var/www/html/cp/tarikh
-# crontab -l | grep -v '/cp/expire.php'  | crontab  -
-# crontab -l | grep -v '/cp/synctraffic.php'  | crontab  -
-# (crontab -l ; echo "* * * * * wget  $protcohttp://${defdomain}:$serverPort/cp/expire.php >/dev/null 2>&1
-# * * * * * wget $protcohttp://${defdomain}:$serverPort/cp/synctraffic.php >/dev/null 2>&1" ) | crontab - &
-# wait
+curl -u "$adminusername:$adminpassword" "http://${ipv4}:$serverPort/cp/reinstall.php"
+cp /var/www/html/cp/tarikh /var/www/html/cp/backup/tarikh
+rm -fr /var/www/html/cp/tarikh
+crontab -l | grep -v '/cp/expire.php' | crontab -
+crontab -l | grep -v '/cp/synctraffic.php' | crontab -
+(
+    crontab -l
+    echo "* * * * * wget  $protcohttp://${defdomain}:$serverPort/cp/expire.php >/dev/null 2>&1
+* * * * * wget $protcohttp://${defdomain}:$serverPort/cp/synctraffic.php >/dev/null 2>&1"
+) | crontab - &
+wait
 clear
 echo "DomainPanel $defdomain" >>/var/www/xpanelport
-printf "\nXPanel Link : $protcohttp://${defdomain}:$serverPort/cp/index.php"
-printf "\nUsername : \e[31m${adminusername}\e[0m "
-printf "\nPassword : \e[31m${adminpassword}\e[0m "
-printf "\nPort : \e[31m${port}\e[0m \n"
-sleep infinity
+touch ./server_details
+echo "\nXPanel Link : $protcohttp://${defdomain}:$serverPort/cp/index.php\nUsername : \e[31m${adminusername}\e[0m \nPassword : \e[31m${adminpassword}\e[0m \nPort : \e[31m${port}\e[0m \n" >>./server_details
