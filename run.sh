@@ -1,3 +1,3 @@
 #!/bin/bash
-echo ./server_details
-sleep infinite
+cat ./server_details
+sleep infinity
